@@ -98,6 +98,7 @@ let data_obj_returned = (empl_obj) => {
 };
 
 
+
 //display 12 users 
 for(let i = 0; i < all_employees.length; i += 1) {
 
