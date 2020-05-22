@@ -17,9 +17,22 @@
 //fetch functions
 
 //number of random users which need to be picked up from the fetch api 
-let num_rand_users = 12
+let num_rand_users = 13;
 
 let glry_div = document.getElementById('gallery');
+
+let all_employees = [];
+
+//display 12 users 
+for(let i = 0; i < num_rand_users; i += 1) {
+
+    //fetch ; store all results 
+    fetch('https://randomuser.me/api/')
+        .then(response => response.json())
+        .then(data => all_employees.push(data.results[0]));
+
+};
+
 
 //store employee info in an object
 let data_obj_returned = (empl_obj) => {
@@ -84,14 +97,16 @@ let data_obj_returned = (empl_obj) => {
 
 };
 
-//display 12 users 
-for(let i = 0; i < num_rand_users; i += 1) {
 
-    //fetch ; store all results 
-    fetch('https://randomuser.me/api/')
-        .then(response => response.json())
-        .then(data => data_obj_returned(data.results[0]));
+//display 12 users 
+for(let i = 0; i < all_employees.length; i += 1) {
+
+    data_obj_returned(all_employees[i]); 
 
 };
+
+
+
+
 
 /********************************************************************************************************/
