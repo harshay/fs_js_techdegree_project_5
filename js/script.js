@@ -5,62 +5,93 @@
  * Full Stack Javascript
  * Grading Level : Exceeds
 ********************************************************************************************************/
+//notes
+
 
 //API Documentation : https://randomuser.me/documentation
 //url for extracting data using the fetch api : 'https://randomuser.me/api/'      
 
-/*
-Get and display 12 random users
-With information provided from The Random User Generator API, send a single request to the API, and use the response data to display 12 users, along with some basic information for each:
-Image
-First and Last Name
-Email
-City or location
-Refer to the mockups and the comments in the index.html file for an example of what info should be displayed on the page and how it should be styled.
-*/   
-
 /********************************************************************************************************/
 
+//use fetch api 
+//fetch functions
 
+//number of random users which need to be picked up from the fetch api 
+let num_rand_users = 12
 
+let glry_div = document.getElementById('gallery');
 
-/********************************************************************************************************/
-/*
-use fetch api 
-fetch functions
-*/
-
-fetch('https://randomuser.me/api/')
-    .then(response => response.json())
-    .then(data => console.log(data.results[0]));
+//store employee info in an object
+let data_obj_returned = (empl_obj) => {
 
     
+    //create card div containing info for one employee
+    let card_main_div = document.createElement('div');
+
+    card_main_div.className = 'card';
+
+    glry_div.appendChild(card_main_div);
+
+    //image container div
+    let  card_1_div = document.createElement('div');
+
+    //info container div
+    let  card_2_div = document.createElement('div');
+
+    //assign class names to newly created divs
+    card_1_div.className = 'card-img-container';
+    card_2_div.className = 'card-info-container';
+
+    card_main_div.appendChild(card_1_div);  
+    card_main_div.appendChild(card_2_div);
+
+    //name
+    card_2_div_h3 = document.createElement('h3');
+    card_2_div_h3.className = 'card-name cap';
+    card_2_div_h3.id = 'name';
+
+    //email
+    card_2_div_p1 = document.createElement('p');
+    card_2_div_p1.className = 'card-text';
+
+    //city 
+    card_2_div_p2 = document.createElement('p');
+    card_2_div_p2.className = 'card-text cap'; 
+
+    card_2_div.appendChild(card_2_div_h3);
+    card_2_div.appendChild(card_2_div_p1);
+    card_2_div.appendChild(card_2_div_p2);
+
+    //console.log(empl_obj); 
+
+    //contruct img tag
+    let img_string = '<img class="card-img" src="' + empl_obj.picture.medium + '" alt="profile picture">'; 
+
+    //contruct h3 tag
+    let h3_string =  empl_obj.name.first + ' ' + empl_obj.name.last; 
+
+    //contruct p (1) tag
+    let p1_string = empl_obj.email; 
+
+    //contruct p (2) tag
+    let p2_string = empl_obj.location.city  + ', ' + empl_obj.location.state; 
+
+    //add employee info to tags
+    card_1_div.innerHTML = img_string; 
+    card_2_div_h3.innerHTML = h3_string;
+    card_2_div_p1.innerHTML = p1_string;
+    card_2_div_p2.innerHTML = p2_string; 
+
+};
+
+//display 12 users
+for(let i = 0; i < num_rand_users; i += 1) {
+
+    //fetch ; store all results 
+    fetch('https://randomuser.me/api/')
+        .then(response => response.json())
+        .then(data => data_obj_returned(data.results[0]));
+
+};
+
 /********************************************************************************************************/
-
-/*
-
-
-                <div class="card">
-                    <div class="card-img-container">
-                        <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
-                    </div>
-                    <div class="card-info-container">
-                        <h3 id="name" class="card-name cap">first last</h3>
-                        <p class="card-text">email</p>
-                        <p class="card-text cap">city, state</p>
-                    </div>
-                </div>
-
-*/
-
-/*
-
-1 - create  a div with class card 
-2 - create another div (1) within the div created in step 1 : class="card-img-container"
-3 - create another div (2) within the div created in step 1 : class="card-info-container"  
-4 - create a string containing the img tag and append to div created in step 2 ; 
-5 - create a string containing a h3 tag and append to div created in step 3 ; 
-6 - create a string containing a p (1) tag and append to div created in step 3 ; 
-7 - create a string containing a p (2) tag and append to div created in step 3 ; 
-
-*/
