@@ -84,7 +84,7 @@ let data_obj_returned = (empl_obj) => {
 
 };
 
-//display 12 users
+//display 12 users 
 for(let i = 0; i < num_rand_users; i += 1) {
 
     //fetch ; store all results 
