@@ -23,8 +23,13 @@ let all_employees = [];
 //fetch ; store all results 
 fetch('https://randomuser.me/api/?results=12')
     .then(response => response.json())
-    .then(data => api_result(data.results));
+    .then(data => api_result(data.results))
+    .then(console.log(all_employees));
+    
 
+
+
+//api_result(data.results)
 
 //store results 
 let api_result = (empl_obj) =>  {    
@@ -77,8 +82,6 @@ let data_obj_returned = (empl_obj) => {
     card_2_div.appendChild(card_2_div_p1);
     card_2_div.appendChild(card_2_div_p2);
 
-    //console.log(empl_obj); 
-
     //contruct img tag
     let img_string = '<img class="card-img" src="' + empl_obj.picture.medium + '" alt="profile picture">'; 
 
@@ -99,13 +102,13 @@ let data_obj_returned = (empl_obj) => {
 
 };
 
+
 //display 12 users 
 for(let i = 0; i < all_employees.length; i += 1) {
 
     data_obj_returned(all_employees[i]); 
 
 };
-
 
 
 /********************************************************************************************************/
