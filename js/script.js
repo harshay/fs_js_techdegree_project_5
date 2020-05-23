@@ -16,27 +16,29 @@
 //use fetch api 
 //fetch functions
 
-//number of random users which need to be picked up from the fetch api 
-let num_rand_users = 13;
-
 let glry_div = document.getElementById('gallery');
 
 let all_employees = [];
 
-//display 12 users 
-for(let i = 0; i < num_rand_users; i += 1) {
+//fetch ; store all results 
+fetch('https://randomuser.me/api/?results=12')
+    .then(response => response.json())
+    .then(data => api_result(data.results));
 
-    //fetch ; store all results 
-    fetch('https://randomuser.me/api/')
-        .then(response => response.json())
-        .then(data => all_employees.push(data.results[0]));
+
+//store results 
+let api_result = (empl_obj) =>  {    
+
+    for(let x = 0; x < empl_obj.length; x += 1) {
+
+        all_employees.push(empl_obj[x]);
+
+    };
 
 };
 
-
-//store employee info in an object
+//create employee card
 let data_obj_returned = (empl_obj) => {
-
     
     //create card div containing info for one employee
     let card_main_div = document.createElement('div');
@@ -97,16 +99,12 @@ let data_obj_returned = (empl_obj) => {
 
 };
 
-
-
 //display 12 users 
 for(let i = 0; i < all_employees.length; i += 1) {
 
     data_obj_returned(all_employees[i]); 
 
 };
-
-
 
 
 
