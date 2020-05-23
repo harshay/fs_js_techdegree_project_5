@@ -134,7 +134,7 @@ form_input_1_html.placeholder = 'Search...';
 let form_input_2_html = document.createElement('input'); 
 
 form_input_2_html.type = 'submit';
-form_input_2_html.value = '&#x1F50D;';
+form_input_2_html.placeholder ='&#x1F50D;'; 
 form_input_2_html.className = 'search-submit';
 form_input_2_html.id = 'search-submit';
 
@@ -145,5 +145,28 @@ form_container.appendChild(form_html);
 form_html.appendChild(form_input_1_html); 
 form_html.appendChild(form_input_2_html); 
 
+
+///////////////////////////////////////////////////////// 
+
+let search_func = () => { 
+
+    let keywords_searched = form_input_1_html.value; 
+
+    let name_string = all_employees
+
+    //pick up first and last name and store in variable 
+    //loop through all names to identify search matches  
+    //hide the rest of the elements and show the matched element only 
+    console.log(all_employees[0].name.first);
+
+}; 
+
+form_input_2_html.addEventListener('click', (event) => {
+
+    event.preventDefault();
+
+    search_func();
+
+});
 
 /********************************************************************************************************/
