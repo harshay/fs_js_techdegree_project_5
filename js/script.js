@@ -25,6 +25,8 @@ fetch('https://randomuser.me/api/?results=12')
     .then(response => response.json())
     .then(data => api_result(data.results));
 
+/////////////////////////////////////////////////////////
+
 
 
 //store results for fetch then create employee cards
@@ -44,6 +46,8 @@ let api_result = (empl_obj) =>  {
     };
 
 };
+
+/////////////////////////////////////////////////////////
 
 //create employee card
 let data_obj_returned = (empl_obj) => {
@@ -109,16 +113,37 @@ let data_obj_returned = (empl_obj) => {
 //search functionality 
 // append to : class="search-container" 
 
+let form_container = document.getElementsByClassName('search-container')[0];
 
-/*
-<form action="#" method="get">
-<input type="search" id="search-input" class="search-input" placeholder="Search...">
-<input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
-</form>
-*/ 
+//generate form html 
+let form_html = document.createElement('form'); 
 
+/////////////////////////////////////////////////////////
 
+//generate form input html 
+let form_input_1_html = document.createElement('input'); 
 
+form_input_1_html.type = 'search';
+form_input_1_html.id = 'search-input';
+form_input_1_html.className = 'search-input';
+form_input_1_html.placeholder = 'Search...';
+
+/////////////////////////////////////////////////////////
+
+//generate form input html 
+let form_input_2_html = document.createElement('input'); 
+
+form_input_2_html.type = 'submit';
+form_input_2_html.value = '&#x1F50D;';
+form_input_2_html.className = 'search-submit';
+form_input_2_html.id = 'search-submit';
+
+/////////////////////////////////////////////////////////
+
+form_container.appendChild(form_html); 
+
+form_html.appendChild(form_input_1_html); 
+form_html.appendChild(form_input_2_html); 
 
 
 /********************************************************************************************************/
