@@ -23,20 +23,23 @@ let all_employees = [];
 //fetch ; store all results 
 fetch('https://randomuser.me/api/?results=12')
     .then(response => response.json())
-    .then(data => api_result(data.results))
-    .then(console.log(all_employees));
-    
+    .then(data => api_result(data.results));
 
 
 
-//api_result(data.results)
-
-//store results 
+//store results for fetch then create employee cards
 let api_result = (empl_obj) =>  {    
 
     for(let x = 0; x < empl_obj.length; x += 1) {
 
         all_employees.push(empl_obj[x]);
+
+    };
+
+    //display 12 users 
+    for(let i = 0; i < all_employees.length; i += 1) {
+
+        data_obj_returned(all_employees[i]); 
 
     };
 
@@ -102,13 +105,20 @@ let data_obj_returned = (empl_obj) => {
 
 };
 
+/********************************************************************************************************/
+//search functionality 
+// append to : class="search-container" 
 
-//display 12 users 
-for(let i = 0; i < all_employees.length; i += 1) {
 
-    data_obj_returned(all_employees[i]); 
+/*
+<form action="#" method="get">
+<input type="search" id="search-input" class="search-input" placeholder="Search...">
+<input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+</form>
+*/ 
 
-};
+
+
 
 
 /********************************************************************************************************/
