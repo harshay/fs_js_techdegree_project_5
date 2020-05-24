@@ -176,32 +176,36 @@ let search_func = () => {
 
 }; 
 
-
-/*
 //reset search results when visitor clicks outside the search box
 document.body.addEventListener('click', (event) =>{
  
     //all employee cards
-    let all_employee_cards = document.getElementsByClassName('card');
+    let all_employee_cards = document.getElementsByClassName('card');   
+       
 
-        if(event.target.className !== form_container.className) {
-
+    if((event.target.className !== 'search-input') && (event.target.className !== 'search-submit')) {
+       
         for(let i = 0; i < all_employee_cards.length; i += 1){
 
-            all_employee_cards[i].style.display = '';    
+            all_employee_cards[i].style.display = '';            
         
         };
 
-    };
+   };
 
 }); 
-*/
-
 
 //set up click event listener/search
 form_input_2_html.addEventListener('click', (event) => {
 
     event.preventDefault();
+
+    search_func();
+
+});
+
+//set up click event listener/search
+form_input_2_html.addEventListener('keyup', (event) => {
 
     search_func();
 
