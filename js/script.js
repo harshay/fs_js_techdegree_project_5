@@ -205,10 +205,12 @@ form_input_2_html.addEventListener('click', (event) => {
 });
 
 //set up click event listener/search
-form_input_2_html.addEventListener('keyup', (event) => {
+form_input_1_html.addEventListener('keyup', (event) => {
 
     search_func();
 
 });
 
 /********************************************************************************************************/
+
+//modal window 
