@@ -7,7 +7,6 @@
 ********************************************************************************************************/
 //notes
 
-
 //API Documentation : https://randomuser.me/documentation
 //url for extracting data using the fetch api : 'https://randomuser.me/api/'      
 
@@ -19,6 +18,7 @@
 let glry_div = document.getElementById('gallery');
 
 let all_employees = [];
+let all_employee_names = [];
 
 //fetch ; store all results 
 fetch('https://randomuser.me/api/?results=12')
@@ -26,8 +26,6 @@ fetch('https://randomuser.me/api/?results=12')
     .then(data => api_result(data.results));
 
 /////////////////////////////////////////////////////////
-
-
 
 //store results for fetch then create employee cards
 let api_result = (empl_obj) =>  {    
@@ -55,6 +53,7 @@ let data_obj_returned = (empl_obj) => {
     //create card div containing info for one employee
     let card_main_div = document.createElement('div');
 
+    //class name for an employee card
     card_main_div.className = 'card';
 
     glry_div.appendChild(card_main_div);
@@ -94,6 +93,8 @@ let data_obj_returned = (empl_obj) => {
 
     //contruct h3 tag
     let h3_string =  empl_obj.name.first + ' ' + empl_obj.name.last; 
+
+    all_employee_names.push(h3_string);
 
     //contruct p (1) tag
     let p1_string = empl_obj.email; 
@@ -145,22 +146,59 @@ form_container.appendChild(form_html);
 form_html.appendChild(form_input_1_html); 
 form_html.appendChild(form_input_2_html); 
 
-
 ///////////////////////////////////////////////////////// 
 
+//search value and return the matched employee cards
 let search_func = () => { 
+
+    //all employee cards
+    let all_employee_cards = document.getElementsByClassName('card');
 
     let keywords_searched = form_input_1_html.value; 
 
-    let name_string = all_employees
+    for(let i = 0; i < all_employee_names.length; i += 1) {
 
-    //pick up first and last name and store in variable 
-    //loop through all names to identify search matches  
-    //hide the rest of the elements and show the matched element only 
-    console.log(all_employees[0].name.first);
+        let employee_name = all_employee_names[i];
+
+        let match_test = (employee_name.toUpperCase()).includes(keywords_searched.toUpperCase());
+
+        if(match_test) { 
+
+            all_employee_cards[i].style.display = '';            
+
+        } else {
+
+            all_employee_cards[i].style.display = 'none';
+
+        };      
+
+    }; 
 
 }; 
 
+
+/*
+//reset search results when visitor clicks outside the search box
+document.body.addEventListener('click', (event) =>{
+ 
+    //all employee cards
+    let all_employee_cards = document.getElementsByClassName('card');
+
+        if(event.target.className !== form_container.className) {
+
+        for(let i = 0; i < all_employee_cards.length; i += 1){
+
+            all_employee_cards[i].style.display = '';    
+        
+        };
+
+    };
+
+}); 
+*/
+
+
+//set up click event listener/search
 form_input_2_html.addEventListener('click', (event) => {
 
     event.preventDefault();
