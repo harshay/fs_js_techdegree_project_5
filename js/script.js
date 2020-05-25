@@ -226,6 +226,7 @@ console.log(all_cards);
 
 
 
+
 let mod_window_func = (empl_mod_obj) => { 
 
     let mod_container = document.createElement('div'); 
