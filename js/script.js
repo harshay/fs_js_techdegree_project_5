@@ -19,6 +19,7 @@ let glry_div = document.getElementById('gallery');
 
 let all_employees = [];
 let all_employee_names = [];
+let all_cards;
 
 
 //fetch ; store all results 
@@ -44,7 +45,7 @@ let api_result = (empl_obj) =>  {
 
     };
 
-    let all_cards = document.getElementsByClassName('card');
+   all_cards = document.getElementsByClassName('card');
 
 };
 
