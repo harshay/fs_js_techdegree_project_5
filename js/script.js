@@ -20,6 +20,7 @@ let glry_div = document.getElementById('gallery');
 let all_employees = [];
 let all_employee_names = [];
 let all_cards;
+let selected_employee_name;
 
 
 //fetch ; store all results 
@@ -45,7 +46,73 @@ let api_result = (empl_obj) =>  {
 
     };
 
-   all_cards = document.getElementsByClassName('card');
+    
+    //empl selected
+    all_cards = document.getElementsByClassName('card');
+    /*
+    all_card_img_containers = document.getElementsByClassName('card-img-container');
+    all_card_imgs = document.getElementsByClassName('card-img');
+    all_card_name_caps = document.getElementsByClassName('card-name cap');
+    all_card_texts = document.getElementsByClassName('card-text');
+    all_card_info_containers = document.getElementsByClassName('card-info-container');
+    all_card_text_caps = document.getElementsByClassName('card-text cap');
+    */
+     
+
+
+    for(let z = 0; z < all_cards.length; z += 1) {
+
+        all_cards[z].addEventListener('click', (event) => {
+
+            console.log(event.target.className);
+
+
+            if(event.target.className = 'card-img') {
+                
+
+                selected_employee_name = event.target.parentNode.nextElementSibling.childNodes[0].innerHTML;
+                
+                console.log(selected_employee_name);
+                
+            } else if(event.target.className = 'card-name cap') {
+
+
+                selected_employee_name = event.target.innerHTML;
+
+                console.log(selected_employee_name);                
+
+
+            };
+
+    
+        });
+
+    }
+
+
+
+    /*else if(event.target.className = 'card-info-container') {
+
+
+                selected_employee_name = event.target.childNodes[0].innerHTML;
+
+                console.log(selected_employee_name);                
+
+
+            }*/
+    /*
+    <div class="card">
+                    <div class="card-img-container">
+                        <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
+                    </div>
+                    <div class="card-info-container">
+                        <h3 id="name" class="card-name cap">first last</h3>
+                        <p class="card-text">email</p>
+                        <p class="card-text cap">city, state</p>
+                    </div>
+                </div>
+    */
+    
 
 };
 
@@ -219,10 +286,6 @@ form_input_1_html.addEventListener('keyup', (event) => {
 
 /********************************************************************************************************/
 //modal window 
-
-
-console.log(all_cards);
-
 
 
 
