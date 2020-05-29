@@ -61,6 +61,7 @@ let api_result = (empl_obj) =>  {
     console.log(all_next_buttons.length);
     all_prev_buttons = document.getElementsByClassName('modal-prev btn');
 
+    
     //hide 12 modal windows
     for(let u = 0; u < all_modal_containers.length; u += 1) {
 
