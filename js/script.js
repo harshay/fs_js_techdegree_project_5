@@ -15,6 +15,8 @@
 //use fetch api 
 //fetch functions
 
+document.body.style.backgroundColor = "lightgrey";
+
 let glry_div = document.getElementById('gallery');
 
 let all_employees = [];
@@ -49,7 +51,7 @@ let api_result = (empl_obj) =>  {
 
     /////////////////////////////////////////////////////////
 
-    //display 12 modal windows
+    //create 12 modal windows
     for(let u = 0; u < all_employees.length; u += 1) {
 
         mod_window_func(all_employees[u]);
@@ -58,17 +60,15 @@ let api_result = (empl_obj) =>  {
 
     all_modal_containers = document.getElementsByClassName('modal-container');    
     all_next_buttons = document.getElementsByClassName('modal-next btn');    
-    console.log(all_next_buttons.length);
     all_prev_buttons = document.getElementsByClassName('modal-prev btn');
 
-    
+
     //hide 12 modal windows
     for(let u = 0; u < all_modal_containers.length; u += 1) {
 
         all_modal_containers[u].style.display = 'none'; 
 
     };
-
 
     //////////////////////////////////////////////////////
 
@@ -125,7 +125,6 @@ let api_result = (empl_obj) =>  {
             //identify and store selected employee index
             for(let y = 0; y < all_employee_names.length; y += 1) { 
 
-
                 if(all_employee_names[y] === selected_employee_name) {
         
                     selected_index = y;     
@@ -133,43 +132,72 @@ let api_result = (empl_obj) =>  {
                 };                
         
             };
-
-
            
             //pass selected employee to open modal window
             all_modal_containers[selected_index].style.display = "";
-
-
-
     
         });
 
     };
 
-
-    //next buttons
-
-    /*
+    //next buttons    
     for(let m = 0; m < all_next_buttons.length; m += 1) {
         
-        console.log(all_next_buttons.length);
-
         all_next_buttons[m].addEventListener('click', (event) => {
 
-            all_modal_containers[selected_index].style.display = "none";
 
-            all_modal_containers[selected_index+1].style.display = "";
+            if(selected_index === (all_next_buttons.length-1)) {
 
+                all_modal_containers[selected_index].style.display = "none";
+
+                all_modal_containers[0].style.display = "";
+    
+                selected_index = 0; 
+
+            } else {
+
+                all_modal_containers[selected_index].style.display = "none";
+
+                all_modal_containers[selected_index+1].style.display = "";
+
+                selected_index += 1; 
+           
+            };
 
         });
 
     };
-    */
 
+     //prev buttons    
+    for(let n = 0; n < all_prev_buttons.length; n += 1) {        
+
+        all_prev_buttons[n].addEventListener('click', (event) => {
+
+            
+            if(selected_index === 0) {
+
+                all_modal_containers[selected_index].style.display = "none";
+
+                all_modal_containers[all_prev_buttons.length - 1].style.display = "";
+
+                selected_index = all_prev_buttons.length - 1; 
+
+
+            } else {
+            
+                all_modal_containers[selected_index].style.display = "none";
+
+                all_modal_containers[selected_index-1].style.display = "";
+
+                selected_index -= 1; 
+
+            };
+
+        });
+
+    };
 
 };
-
-
 
 /////////////////////////////////////////////////////////
 
@@ -461,7 +489,7 @@ let mod_window_func = (empl_mod_obj) => {
     mod_btn_container_b2.id = 'modal-next'; 
     
     mod_btn_container_b1.className = 'modal-prev btn';
-    mod_btn_container_b2.ClassName = 'modal-next btn'; 
+    mod_btn_container_b2.className = 'modal-next btn'; 
     
     mod_btn_container_b1.innerHTML = 'Prev';
     mod_btn_container_b2.innerHTML = 'Next';
@@ -480,11 +508,5 @@ let mod_window_func = (empl_mod_obj) => {
     });
     
 }; 
-
-
-
-
-
-
 
 /********************************************************************************************************/
