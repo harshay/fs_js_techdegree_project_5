@@ -21,6 +21,7 @@ let all_employees = [];
 let all_employee_names = [];
 let all_cards;
 let selected_employee_name;
+let selected_index; 
 
 
 //fetch ; store all results 
@@ -46,73 +47,124 @@ let api_result = (empl_obj) =>  {
 
     };
 
-    
-    //empl selected
+    /////////////////////////////////////////////////////////
+
+    //display 12 modal windows
+    for(let u = 0; u < all_employees.length; u += 1) {
+
+        mod_window_func(all_employees[u]);
+
+    };
+
+    all_modal_containers = document.getElementsByClassName('modal-container');    
+    all_next_buttons = document.getElementsByClassName('modal-next btn');    
+    console.log(all_next_buttons.length);
+    all_prev_buttons = document.getElementsByClassName('modal-prev btn');
+
+    //hide 12 modal windows
+    for(let u = 0; u < all_modal_containers.length; u += 1) {
+
+        all_modal_containers[u].style.display = 'none'; 
+
+    };
+
+
+    //////////////////////////////////////////////////////
+
     all_cards = document.getElementsByClassName('card');
-    /*
-    all_card_img_containers = document.getElementsByClassName('card-img-container');
-    all_card_imgs = document.getElementsByClassName('card-img');
-    all_card_name_caps = document.getElementsByClassName('card-name cap');
-    all_card_texts = document.getElementsByClassName('card-text');
-    all_card_info_containers = document.getElementsByClassName('card-info-container');
-    all_card_text_caps = document.getElementsByClassName('card-text cap');
-    */
-     
 
-
+    //identify the employee selected 
     for(let z = 0; z < all_cards.length; z += 1) {
 
         all_cards[z].addEventListener('click', (event) => {
 
-            console.log(event.target.className);
 
-
-            if(event.target.className = 'card-img') {
-                
+            if(event.target.className === 'card-img') {                
 
                 selected_employee_name = event.target.parentNode.nextElementSibling.childNodes[0].innerHTML;
                 
-                console.log(selected_employee_name);
-                
-            } else if(event.target.className = 'card-name cap') {
+               
+            } else if(event.target.className === 'card-name cap') {
 
 
-                selected_employee_name = event.target.innerHTML;
-
-                console.log(selected_employee_name);                
+                selected_employee_name = event.target.innerHTML;          
 
 
-            };
+            } else if(event.target.className === 'card-text') {
+
+
+                selected_employee_name = event.target.parentNode.childNodes[0].innerHTML;
 
     
-        });
-
-    }
-
-
-
-    /*else if(event.target.className = 'card-info-container') {
+            } else if(event.target.className === 'card-info-container') {
 
 
                 selected_employee_name = event.target.childNodes[0].innerHTML;
 
-                console.log(selected_employee_name);                
+
+            } else if(event.target.className === 'card-text cap') {
 
 
-            }*/
-    /*
-    <div class="card">
-                    <div class="card-img-container">
-                        <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
-                    </div>
-                    <div class="card-info-container">
-                        <h3 id="name" class="card-name cap">first last</h3>
-                        <p class="card-text">email</p>
-                        <p class="card-text cap">city, state</p>
-                    </div>
-                </div>
-    */
+                selected_employee_name = event.target.parentNode.childNodes[0].innerHTML;
+
     
+            } else if(event.target.className === 'card-img-container') {
+
+
+                selected_employee_name = event.target.nextElementSibling.childNodes[0].innerHTML;
+    
+    
+            } else if(event.target.className === 'card') {
+
+                selected_employee_name = event.target.childNodes[1].childNodes[0].innerHTML;
+   
+    
+            };
+
+            //identify and store selected employee index
+            for(let y = 0; y < all_employee_names.length; y += 1) { 
+
+
+                if(all_employee_names[y] === selected_employee_name) {
+        
+                    selected_index = y;     
+        
+                };                
+        
+            };
+
+
+           
+            //pass selected employee to open modal window
+            all_modal_containers[selected_index].style.display = "";
+
+
+
+    
+        });
+
+    };
+
+
+    //next buttons
+
+    /*
+    for(let m = 0; m < all_next_buttons.length; m += 1) {
+        
+        console.log(all_next_buttons.length);
+
+        all_next_buttons[m].addEventListener('click', (event) => {
+
+            all_modal_containers[selected_index].style.display = "none";
+
+            all_modal_containers[selected_index+1].style.display = "";
+
+
+        });
+
+    };
+    */
+
 
 };
 
@@ -287,14 +339,12 @@ form_input_1_html.addEventListener('keyup', (event) => {
 /********************************************************************************************************/
 //modal window 
 
-
-
-
 let mod_window_func = (empl_mod_obj) => { 
 
     let mod_container = document.createElement('div'); 
     mod_container.className = 'modal-container'; 
 
+    document.body.appendChild(mod_container);
     ////////////////////////////////////////////////////////
 
     let mod_main_div = document.createElement('div'); 
@@ -329,7 +379,7 @@ let mod_window_func = (empl_mod_obj) => {
     ////////////////////////////////////////////////////////
 
     //modal window img tag 
-    let mod_img_tag = doument.createElement('img'); 
+    let mod_img_tag = document.createElement('img'); 
     mod_img_tag.src = empl_mod_obj.picture.medium;
     mod_img_tag.className = 'modal-img'; 
     mod_img_tag.alt = 'profile picture';  
@@ -384,7 +434,7 @@ let mod_window_func = (empl_mod_obj) => {
     mod_p_bday.className = 'modal-text';
 
     mod_p_phone.innerHTML = empl_mod_obj.phone;
-    mod_p_street.innerHTML = empl_mod_obj.location.street;
+    mod_p_street.innerHTML = empl_mod_obj.location.street.name;
     mod_p_bday.innerHTML = empl_mod_obj.dob.date;
 
     mod_info_container.appendChild(mod_p_phone);
@@ -418,7 +468,15 @@ let mod_window_func = (empl_mod_obj) => {
     mod_btn_container.appendChild(mod_btn_container_b1);
     mod_btn_container.appendChild(mod_btn_container_b2);
 
+
     //////////////////////////////////////////////////////// 
+
+    mod_button.addEventListener('click', () => {
+
+        mod_container.style.display = 'none'; 
+
+
+    });
     
 }; 
 
