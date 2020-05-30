@@ -141,7 +141,7 @@ let api_result = (empl_obj) =>  {
 
     };
 
-    //next buttons    
+    //next buttons  
     for(let m = 0; m < all_next_buttons.length; m += 1) {
         
         all_next_buttons[m].addEventListener('click', (event) => {
@@ -169,7 +169,7 @@ let api_result = (empl_obj) =>  {
 
     };
 
-     //prev buttons    
+    //prev buttons 
     for(let n = 0; n < all_prev_buttons.length; n += 1) {        
 
         all_prev_buttons[n].addEventListener('click', (event) => {
@@ -331,6 +331,7 @@ let search_func = () => {
 
 }; 
 
+/*
 //reset search results when visitor clicks outside the search box
 document.body.addEventListener('click', (event) => {
  
@@ -348,7 +349,8 @@ document.body.addEventListener('click', (event) => {
 
    };
 
-}); 
+});
+*/ 
 
 //set up click event listener/search
 form_input_2_html.addEventListener('click', (event) => {
@@ -362,7 +364,22 @@ form_input_2_html.addEventListener('click', (event) => {
 //set up click event listener/search
 form_input_1_html.addEventListener('keyup', (event) => {
 
-    search_func();
+    //all employee cards
+    let all_employee_cards = document.getElementsByClassName('card');   
+
+    if(form_input_1_html.value === '') {
+
+        for(let i = 0; i < all_employee_cards.length; i += 1){
+
+            all_employee_cards[i].style.display = '';            
+        
+        };
+
+    } else { 
+
+        search_func();
+
+    };
 
 });
 
