@@ -15,6 +15,7 @@
 //use fetch api 
 //fetch functions
 
+//change background colour (exceeds expectation grade)
 document.body.style.backgroundColor = "lightgrey";
 
 let glry_div = document.getElementById('gallery');
@@ -366,8 +367,7 @@ form_input_1_html.addEventListener('keyup', (event) => {
 });
 
 /********************************************************************************************************/
-//modal window 
-
+//function will create a modal window
 let mod_window_func = (empl_mod_obj) => { 
 
     let mod_container = document.createElement('div'); 
@@ -455,6 +455,7 @@ let mod_window_func = (empl_mod_obj) => {
 
     //phone, street, bday 
     let mod_p_phone = document.createElement('p');
+    let mod_p_phone_pre; 
     let mod_p_street = document.createElement('p');
     let mod_p_bday = document.createElement('p');
 
@@ -462,9 +463,15 @@ let mod_window_func = (empl_mod_obj) => {
     mod_p_street.className = 'modal-text';
     mod_p_bday.className = 'modal-text';
 
-    mod_p_phone.innerHTML = empl_mod_obj.phone;
-    mod_p_street.innerHTML = empl_mod_obj.location.street.name;
-    mod_p_bday.innerHTML = empl_mod_obj.dob.date;
+    mod_p_phone_pre = empl_mod_obj.phone; 
+
+    //extract 'numbers only' from the string returned
+    let reg_phone = /\d+/g;
+    let reg_phone_result = ((mod_p_phone_pre.match(reg_phone)).join()).replace(/,/g,'');
+
+    mod_p_phone.innerHTML = '('+ reg_phone_result.substring(0,3) + ') ' + reg_phone_result.substring(3,6) + '-' + reg_phone_result.substring(6,15);
+    mod_p_street.innerHTML = empl_mod_obj.location.street.number + ' ' + empl_mod_obj.location.street.name + ',' + empl_mod_obj.location.city + ',' + empl_mod_obj.location.country;
+    mod_p_bday.innerHTML = 'Birthday: ' + (empl_mod_obj.dob.date).substring(0,10);
 
     mod_info_container.appendChild(mod_p_phone);
     mod_info_container.appendChild(mod_p_street);
